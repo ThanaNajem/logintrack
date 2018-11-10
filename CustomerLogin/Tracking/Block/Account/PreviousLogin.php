@@ -1,6 +1,7 @@
 <?php
 namespace CustomerLogin\Tracking\Block\Account;
-class PreviousLogin extends \Magento\Framework\View\Element\Template{
+use \Magento\Framework\View\Element\Template;
+class PreviousLogin extends Template{
 protected $customerSession;
 protected $_loginHistory;
 protected $_customerID;
@@ -14,7 +15,7 @@ protected $_customerID;
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
         \Magento\Customer\Model\Session $customerSession,
-         \Magento\Customer\Model\LoginHistory $loginHistory,
+         \CustomerLogin\Tracking\Model\LoginHistory $loginHistory,
         array $data = []
     ) {
         parent::__construct($context, $data);
@@ -55,7 +56,8 @@ protected $_customerID;
     	return count($this->getLastLoginTransactionsInformationForFixedCustomer());
     }
     public function getLastLoginTransactionsInformationForFixedCustomer(){
-    	$returnedCollection = $this->getCollection()->addAttributeToSelect("*")->addAttributeToFilter("customer_id", array("eq" => $this->_customerID))->load();//addAttributeToSort("login_time","DESC");
+        var_dump(count($this->getCollection()));
+    	$returnedCollection = $this->getCollection()->addFieldToSelect("*")->addFieldToFilter("customer_id", array("eq" => $this->_customerID))->load();//addAttributeToSort("login_time","DESC");
     	var_dump(count($returnedCollection));
     	return $returnedCollection; 
     

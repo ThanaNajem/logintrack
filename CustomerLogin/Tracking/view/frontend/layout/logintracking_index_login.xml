@@ -23,7 +23,7 @@
                     <block class="Magento\Customer\Block\Account\SortLinkInterface" name="customer-account-navigation-account-link">
                         <arguments>
                             <argument name="label" xsi:type="string" translate="true">My Account</argument>
-                            <argument name="path" xsi:type="string">customer/account</argument>
+                            <argument name="path" xsi:type="string">logintracking/account/previouslogin</argument>
                             <argument name="sortOrder" xsi:type="number">250</argument>
                         </arguments>
                     </block>
