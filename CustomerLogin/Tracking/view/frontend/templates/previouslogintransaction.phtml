@@ -1,0 +1,22 @@
+<?php
+
+?>
+<table>
+	<tr>
+		<th>ID</th>
+		<th>Date/Time login</th>
+		<th>User Agent</th>
+
+	</tr>
+	<?php 
+	$lastLoginHistoryRecored = $block->getLastLoginTransactionsInformationForFixedCustomer();
+	?>
+
+	<tr>
+		<td><?php echo $lastLoginHistoryRecored->getId(); ?></td>
+		<td><?php echo $lastLoginHistoryRecored->getIpAddress(); ?></td>
+		<td></td>
+	</tr>
+	
+
+</table>
