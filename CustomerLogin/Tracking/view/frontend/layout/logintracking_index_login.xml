@@ -34,12 +34,12 @@
                     </block>
                     <block class="Magento\Customer\Block\Account\SortLinkInterface" name="customer-account-navigation-address-link">
                         <arguments>
-                            <argument name="label" xsi:type="string" translate="true">Address Book</argument>
-                            <argument name="path" xsi:type="string">customer/address</argument>
+                            <argument name="label" xsi:type="string" translate="true">Login History</argument>
+                            <argument name="path" xsi:type="string">logintracking/account/loginhistorypagination</argument>
                             <argument name="sortOrder" xsi:type="number">190</argument>
                         </arguments>
                     </block>
-                    <block class="Magento\Customer\Block\Account\SortLinkInterface" name="customer-account-navigation-account-edit-link">
+                    <!-- <block class="Magento\Customer\Block\Account\SortLinkInterface" name="customer-account-navigation-account-edit-link">
                         <arguments>
                             <argument name="label" xsi:type="string" translate="true">Account Information</argument>
                             <argument name="path" xsi:type="string">customer/account/edit</argument>
@@ -50,7 +50,7 @@
                         <arguments>
                             <argument name="sortOrder" xsi:type="number">130</argument>
                         </arguments>
-                    </block>
+                    </block> -->
                 </block>
             </block>
         </referenceContainer>

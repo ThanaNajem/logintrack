@@ -1,0 +1,47 @@
+<?php
+
+?>
+	<?php if ($block->getPagerHtml()): ?>
+        <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+    <?php endif ?>
+
+    <?php $loginHistoryRecords = $block->getCustomCollection(); ?>
+<?php if ($loginHistoryRecords && count($loginHistoryRecords)): ?>
+    <div class="table-wrapper orders-history">
+        <table class="data table table-order-items history" id="my-orders-table">
+            <caption class="table-caption"><?php echo __('Grid Record') ?></caption>
+            <thead>
+            <tr>
+                <th scope="col" class="col id"><?php echo __('ID') ?></th>
+                <th scope="col" class="col title"><?php echo __('IP address') ?></th>
+                <th scope="col" class="col product"><?php echo __('Date/Time login') ?></th>
+                <th scope="col" class="col amount"><?php echo __('User Agent') ?></th> 
+
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($loginHistoryRecords as $loginHistoryRecord): ?>
+                <tr>
+                    <td data-th="<?= $block->escapeHtml(__('ID')) ?>" class="col id">
+                        <?php echo $loginHistoryRecord->getId() ?> 
+                    </td>
+                    <td data-th="<?= $block->escapeHtml(__('IP address')) ?>"
+                        class="col ipaddress"><?php echo date('Y-m-d', strtotime($loginHistoryRecord->getIpAddress())); ?></td>
+                    <td data-th="<?= $block->escapeHtml(__('Date/Time login')) ?>" class="col date-time-login">
+                            <?php echo $loginHistoryRecord->getLoginTime(); ?>
+                        
+                    </td>
+                    <td data-th="<?= $block->escapeHtml(__('User Agent')) ?>"
+                        class="col user-agent"><?php echo $loginHistoryRecord->getUserAgent() ?></td>
+                    
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>  
+    <?php if ($block->getPagerHtml()): ?>
+        <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+    <?php endif ?>
+<?php else: ?>
+    <div class="message info empty"><span><?php echo __('No any record.'); ?></span></div>
+<?php endif ?>

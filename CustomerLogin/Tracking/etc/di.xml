@@ -1,8 +1,6 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="\Magento\Customer\Controller\Account\LoginPost" type="CustomerLogin\Tracking\Controller\Account\LoginPost" />
-    <preference for="\Magento\Customer\Controller\Account\Index" type="CustomerLogin\Tracking\Controller\Account\Index" />
-    <!-- <preference for="\Magento\Customer\Block\Account\Dashboard\Info" type="CustomerLogin\Tracking\Block\Account\PreviousLogin" /> -->
-
-
+    <!-- <preference for="\Magento\Customer\Controller\Account\Index" type="CustomerLogin\Tracking\Controller\Account\Index" /> -->
+    <!-- <preference for="\Magento\Customer\Block\Account\Dashboard\Address" type="CustomerLogin\Tracking\Block\Account\LoginHistoryPagination" /> -->
 </config>
