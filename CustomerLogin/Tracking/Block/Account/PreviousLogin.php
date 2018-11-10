@@ -29,10 +29,10 @@ protected $_customerID;
 		if ($this->checkIfCustomerLoggedIn()) {
 		$this->_customerID = $this->customerSession->getCustomer()->getId(); 
 		if ($this->checkIfThisIsFirstLogin()) {
-			 $this->getMessageForFirstLogin();
+			return  $this->getMessageForFirstLogin();
 		}
 		else{
-			$this->getLastLoginTransactionsInformationForFixedCustomer();
+			return $this->getFirstItemOfPreviouslyCurrentLoginHistoryCollection();
 		}
 		}
 		else{
@@ -40,7 +40,7 @@ protected $_customerID;
 		}
 		
     	
-   		var_dump($customerID); 
+   		var_dump($this->_customerID); 
 
 
     }
@@ -53,20 +53,51 @@ protected $_customerID;
  	}
  	//timesOfCustomerIsLoggedIn
     public function getCountOfCustomerLogin(){
-    	return count($this->getLastLoginTransactionsInformationForFixedCustomer());
+    	return count($this->getFirstItemOfPreviouslyCurrentLoginHistoryCollection());
     }
-    public function getLastLoginTransactionsInformationForFixedCustomer(){
-        var_dump(count($this->getCollection()));
-    	$returnedCollection = $this->getCollection()->addFieldToSelect("*")->addFieldToFilter("customer_id", array("eq" => $this->_customerID))->load();//addAttributeToSort("login_time","DESC");
-    	var_dump(count($returnedCollection));
-    	return $returnedCollection; 
+ //    public function getLastLoginTransactionsInformationForFixedCustomer(){
+
+ //        $this->_customerID = $this->customerSession->getCustomer()->getId(); 
+ //        var_dump(count($this->getCustomCollection()->addFieldToSelect("*")->addFieldToFilter("customer_id", array("eq" => $this->_customerID)))); 
+        
+ //    	$returnedCollection = $this->getCustomCollection()->addFieldToSelect("*")->addFieldToFilter("customer_id", array("eq" => $this->_customerID));//->load();//addAttributeToSort("login_time","DESC");
+ //     var_dump($this->getFirstItemOfLoginHistoryCollection()->getId());
+ //    	return $returnedCollection; 
     
-	}  
+	// } 
+    public function getFirstItemOfPreviouslyCurrentLoginHistoryCollection(){
+        // return 
+
+        $this->_customerID = $this->customerSession->getCustomer()->getId(); 
+       $collection = $this->getCustomCollection()->addFieldToSelect("*")->addFieldToFilter("customer_id", array("eq" => $this->_customerID))->addFieldToFilter("id", array("neq" => $this->getLastLoginId()))->setOrder("login_time","DESC");
+        return $collection->getFirstItem();
+        
+    } 
+    public function getPreviouslyOfCurrentLoginId(){
+       return $this->getFirstItemOfPreviouslyCurrentLoginHistoryCollection()->getId();
+    }
+    public function getPreviouslyOfCurrentLoginIpAddress(){
+       return $this->getFirstItemOfPreviouslyCurrentLoginHistoryCollection()->getIpAddress();
+    }
+    public function getPreviouslyOfCurrentLoginUserAgent(){
+       return $this->getFirstItemOfPreviouslyCurrentLoginHistoryCollection()->getUserAgent();
+    }
+    public function getPreviouslyOfCurrentLoginTime(){
+       return $this->getFirstItemOfPreviouslyCurrentLoginHistoryCollection()->getLoginTime();
+    }
+
+
+    public function getLastLoginId(){
+
+        // $this->_customerID = $this->customerSession->getCustomer()->getId(); 
+       return  $this->getCustomCollection()->addFieldToSelect("*")->addFieldToFilter("customer_id", array("eq" => $this->_customerID))->getLastItem()->getId();
+    }
+
 	public function getPreviousCurrentLloginTransaction(){
 		$returnedCollection = $this->getLastLoginTransactionsInformationForFixedCustomer();
 		return $returnedCollection[0];
 	}
-    public function getCollection(){
+    public function getCustomCollection(){ 
     	return $this->_loginHistory->getCollection();
     }
     public function getErrorMessageWhenCustomerIsNotLoggedIn(){

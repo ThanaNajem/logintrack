@@ -1,21 +1,23 @@
 <?php
 
 ?>
+<caption><strong>Previously login time</strong></caption>
 <table>
 	<tr>
 		<th>ID</th>
+		<th>IP address</th>
 		<th>Date/Time login</th>
 		<th>User Agent</th>
 
 	</tr>
-	<?php 
-	$lastLoginHistoryRecored = $block->getLastLoginTransactionsInformationForFixedCustomer();
-	?>
+	 
 
 	<tr>
-		<td><?php echo $lastLoginHistoryRecored->getId(); ?></td>
-		<td><?php echo $lastLoginHistoryRecored->getIpAddress(); ?></td>
-		<td></td>
+		<td><?php echo $block->getPreviouslyOfCurrentLoginId(); ?></td>
+		<td><?php echo $block->getPreviouslyOfCurrentLoginIpAddress(); ?></td>
+		<td><?php echo $block->getPreviouslyOfCurrentLoginTime(); ?></td>
+		<td><?php echo $block->getPreviouslyOfCurrentLoginUserAgent(); ?></td>
+		 
 	</tr>
 	
 
